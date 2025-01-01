@@ -1,8 +1,8 @@
 {
   "name": "alexspielwelt-api",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "Alex Spielwelt API",
+  "author": "Alexander Schilling",
   "private": true,
   "license": "UNLICENSED",
   "scripts": {

@@ -1,0 +1,6 @@
+# Auth
+@URL = http://localhost:3001
+
+###
+# @name Try to enter main route
+GET {{URL}}/

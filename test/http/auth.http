@@ -1,6 +1,6 @@
 # Auth
 @URL = http://localhost:3001
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoidXNlciIsImlhdCI6MTczNTg1MzI1NSwiZXhwIjoxNzM1ODUzMzE1fQ.Pan0Hm7CR8-8Ojx1GA29o7Fo0gi7RxPZl08DmqKtySA
+@TOKEN = null
 
 ###
 # @name Login user with username and password

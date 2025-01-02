@@ -3,6 +3,18 @@
 @TOKEN = null
 
 ###
+# @name Register a new user
+POST {{URL}}/auth/register
+Content-Type: application/json
+
+{
+  "username": "admin",
+  "password": "admin123",
+  "name": "Admin",
+  "email": "admin@example.com"
+}
+
+###
 # @name Login user with username and password
 POST {{URL}}/auth/login
 Content-Type: application/json

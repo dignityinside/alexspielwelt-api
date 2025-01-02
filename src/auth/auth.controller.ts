@@ -3,26 +3,40 @@ import { AuthService } from '@/auth/auth.service';
 import { Public } from '@/auth/public.decorator';
 import { User } from '@/users/entities/user.entity';
 import { CreateUserDto } from '@/auth/dto/create-user.dto';
+import { LoginUserDto } from '@/auth/dto/login-user.dto';
 
 @Controller('auth')
 export class AuthController {
+
   constructor(private authService: AuthService) {}
 
+  /**
+   * Register new user
+   * @param createUserDto
+   */
   @Post('register')
   @Public()
-  async register(@Body() registerDto: CreateUserDto): Promise<User> {
-    return await this.authService.register(registerDto);
+  async register(@Body() createUserDto: CreateUserDto): Promise<User> {
+    return await this.authService.register(createUserDto);
   }
 
+  /**
+   * Sign in a user
+   * @param loginUserDto
+   */
   @HttpCode(HttpStatus.OK)
   @Post('login')
   @Public()
-  signIn(@Body() signInDto: Record<string, any>) {
-    return this.authService.signIn(signInDto.username, signInDto.password);
+  async login(@Body() loginUserDto: LoginUserDto) {
+    return await this.authService.login(loginUserDto.username, loginUserDto.password);
   }
 
+  /**
+   * Returns user profile
+   * @param req
+   */
   @Get('profile')
-  getProfile(@Request() req) {
+  async profile(@Request() req) {
     return req.user;
   }
 }

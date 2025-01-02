@@ -18,7 +18,7 @@ export class AuthService {
    * @param username
    * @param pass
    */
-  async signIn(username: string, pass: string): Promise<{ access_token: string }> {
+  async login(username: string, pass: string): Promise<{ access_token: string }> {
     const user = await this.usersService.findOneBy(username);
 
     if (!user) {
@@ -38,6 +38,10 @@ export class AuthService {
     };
   }
 
+  /**
+   * Register a new user
+   * @param createUserDto
+   */
   async register(createUserDto: CreateUserDto) {
     const existingUser = await this.usersService.findOneBy(createUserDto.username);
 

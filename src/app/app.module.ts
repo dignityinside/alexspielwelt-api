@@ -7,6 +7,7 @@ import { AppConfigService } from '@/app/config/config.service';
 import { appConfig } from '@/app/config/app.config';
 import { databaseConfig } from '@/app/config/database.config';
 import { AuthModule } from '@/auth/auth.module';
+import { User } from '@/users/entities/user.entity';
 
 @Module({
   imports: [
@@ -22,7 +23,7 @@ import { AuthModule } from '@/auth/auth.module';
       useFactory: (configService: ConfigService) => ({
         ...configService.get('database'),
         // List of entities
-        entities: [],
+        entities: [User],
       }),
     }),
     AuthModule,

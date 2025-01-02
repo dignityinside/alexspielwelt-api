@@ -1,0 +1,22 @@
+# Auth
+@URL = http://localhost:3001
+@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoidXNlciIsImlhdCI6MTczNTg1MzI1NSwiZXhwIjoxNzM1ODUzMzE1fQ.Pan0Hm7CR8-8Ojx1GA29o7Fo0gi7RxPZl08DmqKtySA
+
+###
+# @name Login user with username and password
+POST {{URL}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "user",
+  "password": "user123"
+}
+
+###
+# @name Returns user profile data
+GET {{URL}}/auth/profile
+Authorization: Bearer {{ TOKEN }}
+
+###
+# @name Try to enter protected route without token
+GET {{URL}}/auth/profile

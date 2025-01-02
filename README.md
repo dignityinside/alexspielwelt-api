@@ -37,4 +37,18 @@ $ npm run test:e2e
 
 ```
 API enpoint: http://localhost:3001
+Adminer: http://localhost:8080
+```
+
+#### Build and run Docker
+
+- `docker-compose up` - Start Docker
+
+Docker database credential:
+
+```
+System: MySQL
+Server: mysql
+Username: root
+Password: password
 ```

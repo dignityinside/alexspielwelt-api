@@ -7,6 +7,7 @@ import { AuthController } from '@/auth/auth.controller';
 import { AuthService } from '@/auth/auth.service';
 import { UsersModule } from '@/users/users.module';
 import { AuthGuard } from '@/auth/auth.guard';
+import { RolesGuard } from '@/auth/roles.guard';
 
 @Module({
   imports: [
@@ -29,6 +30,11 @@ import { AuthGuard } from '@/auth/auth.guard';
     {
       provide: APP_GUARD,
       useClass: AuthGuard,
+    },
+    // apply roles guard globally for all routes
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard,
     },
   ],
   controllers: [AuthController],

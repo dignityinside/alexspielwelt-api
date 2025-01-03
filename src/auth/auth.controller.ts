@@ -4,6 +4,8 @@ import { Public } from '@/auth/public.decorator';
 import { User } from '@/users/entities/user.entity';
 import { CreateUserDto } from '@/auth/dto/create-user.dto';
 import { LoginUserDto } from '@/auth/dto/login-user.dto';
+import { Roles } from '@/auth/roles.decorator';
+import { Role } from '@/auth/role.enum';
 
 @Controller('auth')
 export class AuthController {
@@ -36,6 +38,7 @@ export class AuthController {
    * @param req
    */
   @Get('profile')
+  @Roles(Role.User)
   async profile(@Request() req) {
     return req.user;
   }

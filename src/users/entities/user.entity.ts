@@ -1,4 +1,5 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Role } from '@/auth/role.enum';
 
 @Entity()
 export class User {
@@ -22,4 +23,11 @@ export class User {
 
   @UpdateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP(6)", onUpdate: "CURRENT_TIMESTAMP(6)" })
   updatedAt: Date;
+
+  // TODO PostgreSQL
+  // @Column({ default: Role.User})
+  // roles: Role[];
+
+  @Column('varchar', { length: 255, default: JSON.stringify([Role.User]) })
+  roles: Role[];
 }

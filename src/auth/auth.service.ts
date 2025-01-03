@@ -3,6 +3,7 @@ import { UsersService } from '@/users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { CreateUserDto } from '@/auth/dto/create-user.dto';
+import LoginResponse from '@/auth/response/login.response';
 
 @Injectable()
 export class AuthService {
@@ -18,7 +19,7 @@ export class AuthService {
    * @param username
    * @param pass
    */
-  async login(username: string, pass: string): Promise<{ access_token: string }> {
+  async login(username: string, pass: string): Promise<LoginResponse> {
     const user = await this.usersService.findOneBy(username);
 
     if (!user) {
@@ -33,6 +34,8 @@ export class AuthService {
     const { passwordHash, ...result } = user;
 
     return {
+      id: user.id,
+      name: user.name,
       access_token: await this.generateToken(user),
     };
   }

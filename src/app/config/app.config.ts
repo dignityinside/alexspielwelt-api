@@ -8,6 +8,7 @@ export interface AppConfig {
     secret: string;
     expiresIn: string;
   };
+  nodeEnv: string;
 }
 
 /**
@@ -20,5 +21,6 @@ export const appConfig = registerAs('app', (): AppConfig => ({
       secret: process.env.JWT_SECRET as string,
       expiresIn: process.env.JWT_EXPIRES_IN ?? '30d',
     },
+    nodeEnv: process.env.NODE_ENV || 'development'
   }),
 );

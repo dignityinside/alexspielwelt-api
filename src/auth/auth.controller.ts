@@ -6,6 +6,7 @@ import { CreateUserDto } from '@/auth/dto/create-user.dto';
 import { LoginUserDto } from '@/auth/dto/login-user.dto';
 import { Roles } from '@/auth/roles.decorator';
 import { Role } from '@/auth/role.enum';
+import { ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 
 @Controller('auth')
 export class AuthController {
@@ -18,6 +19,7 @@ export class AuthController {
    */
   @Post('register')
   @Public()
+  @ApiOperation({ summary: 'This action register a new user.' })
   async register(@Body() createUserDto: CreateUserDto): Promise<User> {
     return await this.authService.register(createUserDto);
   }
@@ -29,17 +31,20 @@ export class AuthController {
   @HttpCode(HttpStatus.OK)
   @Post('login')
   @Public()
+  @ApiOperation({ summary: 'This action login a user.' })
   async login(@Body() loginUserDto: LoginUserDto) {
     return await this.authService.login(loginUserDto.username, loginUserDto.password);
   }
 
   /**
    * Returns user profile
-   * @param req
+   * @param request
    */
   @Get('profile')
   @Roles(Role.User)
-  async profile(@Request() req) {
-    return req.user;
+  @ApiOperation({ summary: 'This action show user profile.' })
+  @ApiBearerAuth()
+  async profile(@Request() request) {
+    return request.user;
   }
 }

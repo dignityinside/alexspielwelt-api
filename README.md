@@ -38,6 +38,7 @@ $ npm run test:e2e
 ```
 API enpoint: http://localhost:3001
 Adminer: http://localhost:8080
+Swagger: http://localhost:3001/api
 ```
 
 #### Build and run Docker

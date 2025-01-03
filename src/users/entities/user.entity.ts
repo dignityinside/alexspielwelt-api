@@ -1,5 +1,6 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Role } from '@/auth/enums/role.enum';
+import { Game } from '@/games/entities/game.entity';
 
 @Entity()
 export class User {
@@ -30,4 +31,7 @@ export class User {
 
   @Column('varchar', { length: 255, default: JSON.stringify([Role.User]) })
   roles: Role[];
+
+  @OneToMany(() => Game, (game) => game.user)
+  games: Game[];
 }

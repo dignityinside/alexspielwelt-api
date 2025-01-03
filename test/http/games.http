@@ -1,0 +1,51 @@
+# Auth
+@URL = http://localhost:3001
+@TOKEN = null
+
+###
+# @name Create a new game
+POST {{URL}}/games
+Content-Type: application/json
+Authorization: Bearer {{ TOKEN }}
+
+{
+  "title": "Test game",
+  "intro": "The awesome game.",
+  "img": "https://placehold.co/600x400/png"
+}
+
+###
+# @name Get a list of games
+GET {{URL}}/games
+
+###
+# @name Get a game by slug
+GET {{URL}}/games/test-game
+
+###
+# @name Update a game
+PATCH {{URL}}/games/test-game
+Content-Type: application/json
+Authorization: Bearer {{ TOKEN }}
+
+{
+  "title": "Test game UPDATED",
+  "intro": "The awesome game.",
+  "img": "https://placehold.co/600x400/png"
+}
+
+###
+# @name Delete a game
+DELETE {{URL}}/games/test-game
+Content-Type: application/json
+Authorization: Bearer {{ TOKEN }}
+
+###
+# @name Get a game for edit mode
+GET {{URL}}/games/edit/test-game
+Authorization: Bearer {{ TOKEN }}
+
+###
+# @name Get all games for admin page
+GET {{URL}}/games/admin
+Authorization: Bearer {{ TOKEN }}

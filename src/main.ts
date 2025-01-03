@@ -15,6 +15,13 @@ async function bootstrap() {
   app.useLogger(logLevels);
   Logger.log('Application started');
 
+  // Enable cors
+  app.enableCors({
+    origin: '*',
+    methods: 'GET,PATCH,POST,DELETE',
+    credentials: true,
+  });
+
   await app.listen(appConfig.port ?? 3001);
 }
 

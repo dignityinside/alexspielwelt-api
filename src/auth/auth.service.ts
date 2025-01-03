@@ -29,12 +29,11 @@ export class AuthService {
       throw new UnauthorizedException();
     }
 
+    // Remove password from object
     const { passwordHash, ...result } = user;
 
-    const payload = { sub: user.id, username: user.username, roles: user.roles };
-
     return {
-      access_token: await this.jwtService.signAsync(payload),
+      access_token: await this.generateToken(user),
     };
   }
 
@@ -49,13 +48,11 @@ export class AuthService {
       throw new ConflictException();
     }
 
-    const hashedPassword = await this.hashPassword(createUserDto.password);
-
     const createUser = {
       username: createUserDto.username,
       name: createUserDto.name,
       email: createUserDto.email,
-      passwordHash: hashedPassword,
+      passwordHash: await this.hashPassword(createUserDto.password),
     };
 
     return await this.usersService.create(createUser);
@@ -76,5 +73,19 @@ export class AuthService {
    */
   public async verifyPassword(plainPassword: string, hashedPassword: string): Promise<boolean> {
     return await bcrypt.compare(plainPassword, hashedPassword);
+  }
+
+  /**
+   * Returns generated jwt token
+   * @param user
+   */
+  public async generateToken(user): Promise<string> {
+    const payload = {
+      sub: user.id,
+      username: user.username,
+      roles: user.roles
+    };
+
+    return await this.jwtService.signAsync(payload);
   }
 }

@@ -14,34 +14,24 @@ export class AuthGuard implements CanActivate {
     private readonly reflector: Reflector
   ) {}
 
+  /**
+   * Check can access the route
+   * @param context
+   */
   async canActivate(context: ExecutionContext): Promise<boolean> {
-
-    const isPublic = this.reflector.getAllAndOverride<boolean>(
-      IS_PUBLIC_KEY,
-      [
-        context.getHandler(),
-        context.getClass(),
-      ]
-    );
-
-    if (isPublic) {
-      return true;
-    }
-
     const request = context.switchToHttp().getRequest();
     const token = this.extractTokenFromHeader(request);
+
+    if (this.isPublic(context)) {
+      return true;
+    }
 
     if (!token) {
       throw new UnauthorizedException();
     }
 
     try {
-      request['user'] = await this.jwtService.verifyAsync(
-        token,
-        {
-          secret: this.configService.get('app').jwt.secret,
-        }
-      );
+      request['user'] = await this.getUserFromToken(token);
     } catch {
       throw new UnauthorizedException();
     }
@@ -49,8 +39,37 @@ export class AuthGuard implements CanActivate {
     return true;
   }
 
+  /**
+   * Extract jwt token from header
+   * @param request
+   * @private
+   */
   private extractTokenFromHeader(request: Request): string | undefined {
     const [type, token] = request.headers.authorization?.split(' ') ?? [];
     return type === 'Bearer' ? token : undefined;
+  }
+
+  /**
+   * Check route is public
+   * @param context
+   * @private
+   */
+  private isPublic(context): boolean {
+    return this.reflector.getAllAndOverride<boolean>(
+      IS_PUBLIC_KEY,
+      [context.getHandler(), context.getClass()]
+    );
+  }
+
+  /**
+   * Verify token and returns user data
+   * @param token
+   * @private
+   */
+  private async getUserFromToken(token) {
+    return await this.jwtService.verifyAsync(
+      token,
+      { secret: this.configService.get('app').jwt.secret }
+    );
   }
 }

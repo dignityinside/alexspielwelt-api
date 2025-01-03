@@ -23,7 +23,7 @@ async function bootstrap() {
     credentials: true,
   });
 
-  // Swagger setup
+  // Swagger setup only for dev
   if (appConfig.nodeEnv === 'development') {
     const config = new DocumentBuilder()
       .setTitle('Alex Spielwelt')

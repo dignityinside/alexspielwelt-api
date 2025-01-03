@@ -1,6 +1,6 @@
 # Auth
 @URL = http://localhost:3001
-@TOKEN = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoidGVzdCIsInJvbGVzIjoiW1widXNlclwiXSIsImlhdCI6MTczNTkwMzQ3OCwiZXhwIjoxNzM1OTA3MDc4fQ.p-RAWSYv17mTMeS5wABS60zhdGBXT6pSQmvnkZR0GaA
+@TOKEN = null
 
 ###
 # @name Register a new user

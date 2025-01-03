@@ -6,8 +6,8 @@ import { AppConfigService } from '@/app/config/config.service';
 import { AuthController } from '@/auth/auth.controller';
 import { AuthService } from '@/auth/auth.service';
 import { UsersModule } from '@/users/users.module';
-import { AuthGuard } from '@/auth/auth.guard';
-import { RolesGuard } from '@/auth/roles.guard';
+import { AuthGuard } from '@/auth/guards/auth.guard';
+import { RolesGuard } from '@/auth/guards/roles.guard';
 
 @Module({
   imports: [

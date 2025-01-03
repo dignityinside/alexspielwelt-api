@@ -1,11 +1,11 @@
 import { Body, Controller, Get, HttpCode, HttpStatus, Post, Request } from '@nestjs/common';
 import { AuthService } from '@/auth/auth.service';
-import { Public } from '@/auth/public.decorator';
+import { Public } from '@/auth/decorators/public.decorator';
 import { User } from '@/users/entities/user.entity';
 import { CreateUserDto } from '@/auth/dto/create-user.dto';
 import { LoginUserDto } from '@/auth/dto/login-user.dto';
-import { Roles } from '@/auth/roles.decorator';
-import { Role } from '@/auth/role.enum';
+import { Roles } from '@/auth/decorators/roles.decorator';
+import { Role } from '@/auth/enums/role.enum';
 import { ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 
 @Controller('auth')

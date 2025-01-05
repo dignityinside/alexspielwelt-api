@@ -37,6 +37,7 @@ export class AuthService {
       id: user.id,
       name: user.name,
       access_token: await this.generateToken(user),
+      roles: user.roles,
     };
   }
 

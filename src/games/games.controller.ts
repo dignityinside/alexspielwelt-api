@@ -1,4 +1,15 @@
-import { Body, Controller, Delete, Get, Logger, Param, Patch, Post, Request } from '@nestjs/common';
+import {
+  Body, ClassSerializerInterceptor,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Patch,
+  Post,
+  Request,
+  SerializeOptions,
+  UseInterceptors,
+} from '@nestjs/common';
 import { GamesService } from '@/games/games.service';
 import { ApiBearerAuth, ApiOperation, ApiParam } from '@nestjs/swagger';
 import { CreateGameDto } from '@/games/dto/create-game.dto';
@@ -8,6 +19,7 @@ import { Public } from '@/auth/decorators/public.decorator';
 import { UpdateGameDto } from '@/games/dto/update-game.dto';
 
 @Controller('games')
+@SerializeOptions({ strategy: 'excludeAll' })
 export class GamesController {
 
   constructor(private readonly gamesService: GamesService) {}
@@ -30,6 +42,7 @@ export class GamesController {
    */
   @Get()
   @Public()
+  @UseInterceptors(ClassSerializerInterceptor)
   @ApiOperation({ summary: 'This action returns all games' })
   findAll() {
     return this.gamesService.findAll();
@@ -40,6 +53,7 @@ export class GamesController {
    */
   @Get('admin')
   @Roles(Role.Admin)
+  @UseInterceptors(ClassSerializerInterceptor)
   @ApiOperation({ summary: 'This action returns all games for admin page' })
   @ApiBearerAuth()
   findAllWithoutFilter() {
@@ -52,6 +66,7 @@ export class GamesController {
    */
   @Get(':slug')
   @Public()
+  @UseInterceptors(ClassSerializerInterceptor)
   @ApiOperation({ summary: 'This action returns a game by slug' })
   @ApiParam({ name: 'slug' })
   findOne(@Param('slug') slug: string) {
@@ -79,6 +94,7 @@ export class GamesController {
    */
   @Get('edit/:slug')
   @Roles(Role.Admin)
+  @UseInterceptors(ClassSerializerInterceptor)
   @ApiOperation({ summary: 'This action returns a game by slug for edit mode' })
   @ApiParam({ name: 'slug' })
   findOneWithoutFilter(@Param('slug') slug: string) {

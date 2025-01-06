@@ -41,7 +41,18 @@ export class GamesService {
    */
   async findAll() {
     const games = await this.gameRepository.find({
-      select: ['title', 'slug', 'img', 'intro', 'publisher'],
+      select: [
+        'title',
+        'slug',
+        'img',
+        'rating',
+        'ean',
+        'publisher',
+        'difficulty',
+        'recommendedAge',
+        'players',
+        'playTime'
+      ],
       where: {
         status: Status.Public,
         userId: this._adminId

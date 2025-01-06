@@ -129,7 +129,7 @@ export class Game {
   @Column({
     type: 'enum',
     enum: Status,
-    default: Status.Draft,
+    default: Status.DRAFT,
   })
   @Expose()
   status: Status;

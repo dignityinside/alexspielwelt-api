@@ -54,7 +54,7 @@ export class GamesService {
         'playTime'
       ],
       where: {
-        status: Status.Public,
+        status: Status.PUBLIC,
         userId: this._adminId
       },
       order: { createdAt: 'DESC' }
@@ -90,7 +90,7 @@ export class GamesService {
   async findOne(slug: string): Promise<Game> {
     const game = await this.gameRepository.findOne({
       where: {
-        status: Status.Public,
+        status: Status.PUBLIC,
         userId: this._adminId,
         slug: slug
       },

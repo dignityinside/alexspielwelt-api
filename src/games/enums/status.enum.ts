@@ -1,5 +1,5 @@
 export enum Status {
-  Draft = 'draft',
-  Public = 'public',
-  Hidden = 'hidden',
+  DRAFT = 'draft',
+  PUBLIC = 'public',
+  HIDDEN = 'hidden',
 }

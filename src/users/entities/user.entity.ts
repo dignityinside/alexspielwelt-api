@@ -1,6 +1,7 @@
 import { Column, CreateDateColumn, Entity, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { Role } from '@/auth/enums/role.enum';
 import { Game } from '@/games/entities/game.entity';
+import { Expose } from 'class-transformer';
 
 @Entity()
 export class User {
@@ -11,6 +12,7 @@ export class User {
   username: string;
 
   @Column({ length: 100, nullable: true })
+  @Expose()
   name: string;
 
   @Column({ length: 255 })

@@ -10,6 +10,8 @@ import { AuthModule } from '@/auth/auth.module';
 import { User } from '@/users/entities/user.entity';
 import { Game } from '@/games/entities/game.entity';
 import { GamesModule } from '@/games/games.module';
+import { Genre } from '@/genres/entities/genre.entity';
+import { GenresModule } from '@/genres/genres.module';
 
 @Module({
   imports: [
@@ -25,11 +27,12 @@ import { GamesModule } from '@/games/games.module';
       useFactory: (configService: ConfigService) => ({
         ...configService.get('database'),
         // List of entities
-        entities: [User, Game],
+        entities: [User, Game, Genre],
       }),
     }),
     AuthModule,
-    GamesModule
+    GamesModule,
+    GenresModule
   ],
   controllers: [AppController],
   providers: [AppService, AppConfigService],

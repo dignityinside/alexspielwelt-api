@@ -6,6 +6,7 @@ import { AppService } from '@/app/app.service';
 import { CreateGameDto } from '@/games/dto/create-game.dto';
 import { Status } from '@/games/enums/status.enum';
 import { UpdateGameDto } from '@/games/dto/update-game.dto';
+import { Genre } from '@/genres/entities/genre.entity';
 
 @Injectable()
 export class GamesService {
@@ -14,6 +15,8 @@ export class GamesService {
   constructor(
     @InjectRepository(Game)
     private readonly gameRepository: Repository<Game>,
+    @InjectRepository(Genre)
+    private readonly genreRepository: Repository<Genre>,
     private readonly appService: AppService
   ) {}
 
@@ -27,10 +30,13 @@ export class GamesService {
 
     const currentSlug = await this.generateSlug(slug, title);
 
+    const genres = await this.genreRepository.findByIds(createGameDto.genres);
+
     const game = {
       ...createGameDto,
       slug: currentSlug,
-      userId: userId
+      userId: userId,
+      genres: genres,
     };
 
     return this.gameRepository.save(game);
@@ -57,6 +63,7 @@ export class GamesService {
         status: Status.PUBLIC,
         userId: this._adminId
       },
+      relations: ['user', 'genres'],
       order: { createdAt: 'DESC' }
     });
 
@@ -94,6 +101,7 @@ export class GamesService {
         userId: this._adminId,
         slug: slug
       },
+      relations: ['user', 'genres'],
     });
 
     if (!game) {
@@ -112,6 +120,7 @@ export class GamesService {
       where: {
         slug: slug
       },
+      relations: ['genres'],
     });
 
     if (!game) {
@@ -135,9 +144,12 @@ export class GamesService {
 
     const currentSlug = inputSlug && inputSlug !== slug ? await this.generateSlug(inputSlug, title) : game.slug;
 
+    const genres = await this.genreRepository.findByIds(updateGameDto.genres);
+
     const updatedGame = {
       ...game,
       ...updateGameDto,
+      genres: genres,
       slug: currentSlug,
       userId: userId
     };

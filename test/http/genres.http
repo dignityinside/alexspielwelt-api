@@ -1,0 +1,33 @@
+# Auth
+@URL = http://localhost:3001
+@TOKEN = null
+
+###
+# @name Create a new genre
+POST {{URL}}/games/genres
+Content-Type: application/json
+Authorization: Bearer {{ TOKEN }}
+
+{
+  "name": "Test"
+}
+
+###
+# @name Update a genre
+PATCH {{URL}}/games/genres/test
+Content-Type: application/json
+Authorization: Bearer {{ TOKEN }}
+
+{
+  "name": "Test UPDATED"
+}
+
+###
+# @name Delete a genre
+DELETE {{URL}}/games/genres/test
+Content-Type: application/json
+Authorization: Bearer {{ TOKEN }}
+
+###
+# @name Get all genres
+GET {{URL}}/games/genres/all

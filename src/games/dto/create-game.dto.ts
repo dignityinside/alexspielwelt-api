@@ -1,6 +1,7 @@
 import { IsEnum, IsIn, IsInt, IsNumber, IsOptional, IsString, IsUrl, Length, Matches, Max, Min } from 'class-validator';
 import { Status } from '@/games/enums/status.enum';
 import { ApiProperty } from '@nestjs/swagger';
+import { Genre } from '@/genres/entities/genre.entity';
 
 export class CreateGameDto {
   @IsString()
@@ -129,4 +130,7 @@ export class CreateGameDto {
 
   @IsInt()
   userId: number
+
+  @ApiProperty()
+  genres: Genre[]
 }

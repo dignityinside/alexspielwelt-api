@@ -2,7 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
+  JoinColumn, JoinTable, ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -10,6 +10,7 @@ import {
 import { User } from '@/users/entities/user.entity';
 import { Status } from '@/games/enums/status.enum';
 import { Expose } from 'class-transformer';
+import { Genre } from '@/genres/entities/genre.entity';
 
 @Entity()
 export class Game {
@@ -59,10 +60,6 @@ export class Game {
   @Column({ nullable: true })
   @Expose()
   playTime: string;
-
-  @Column({ length: 150, nullable: true })
-  @Expose()
-  genre: string;
 
   @Column({ nullable: true })
   @Expose()
@@ -121,6 +118,7 @@ export class Game {
 
   @ManyToOne(() => User, (user) => user.games)
   @JoinColumn({ name: 'userId' })
+  @Expose()
   user: User;
 
   @Column()
@@ -133,4 +131,9 @@ export class Game {
   })
   @Expose()
   status: Status;
+
+  @ManyToMany(() => Genre)
+  @JoinTable()
+  @Expose()
+  genres: Genre[];
 }

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateGenreDto } from '@/genres/dto/create-genre.dto';
 import { UpdateGenreDto } from '@/genres/dto/update-genre.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { DeleteResult, Repository } from 'typeorm';
+import { DeleteResult, In, Repository } from 'typeorm';
 import { AppService } from '@/app/app.service';
 import { Genre } from '@/genres/entities/genre.entity';
 
@@ -66,6 +66,14 @@ export class GenresService {
     return await this.genreRepository.find({
       select: ['id', 'name'],
     });
+  }
+
+  /**
+   * Find genres by ids
+   * @param genres
+   */
+  async findByIds(genres) {
+    return await this.genreRepository.findBy({ id: In(genres) });
   }
 
   /**

@@ -1,8 +1,8 @@
 # Alex Spielwelt API
 
-## Description
+API for [Alex Spielwelt Frontend](https://github.com/dignityinside/alexspielwelt-frontend)
 
-Alex Spielwelt API.
+Made with ❤️ in [NestJS](https://nestjs.com/)
 
 ## Project setup
 
@@ -48,8 +48,12 @@ Swagger: http://localhost:3001/api
 Docker database credential:
 
 ```
-System: MySQL
-Server: mysql
+System: PostgreSQL
+Server: postgres
 Username: root
 Password: password
 ```
+
+## License
+
+This project is licensed under the MIT License. See the LICENSE file for details.

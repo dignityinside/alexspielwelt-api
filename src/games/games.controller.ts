@@ -29,7 +29,7 @@ export class GamesController {
    * @param createGameDto
    * @param request
    */
-  @Post()
+  @Post('admin/add')
   @Roles(Role.Admin)
   @ApiOperation({ summary: 'This action adds a new game' })
   @ApiBearerAuth()
@@ -79,7 +79,7 @@ export class GamesController {
    * @param updateGameDto
    * @param request
    */
-  @Patch(':slug')
+  @Patch('admin/:slug')
   @Roles(Role.Admin)
   @ApiOperation({ summary: 'This action updates a game by slug' })
   @ApiParam({ name: 'slug' })
@@ -92,11 +92,12 @@ export class GamesController {
    * Get a game by slug for edit mode
    * @param slug
    */
-  @Get('edit/:slug')
+  @Get('admin/edit/:slug')
   @Roles(Role.Admin)
   @UseInterceptors(ClassSerializerInterceptor)
   @ApiOperation({ summary: 'This action returns a game by slug for edit mode' })
   @ApiParam({ name: 'slug' })
+  @ApiBearerAuth()
   findOneWithoutFilter(@Param('slug') slug: string) {
     return this.gamesService.findOneWithoutFilter(slug);
   }

@@ -19,9 +19,10 @@ import { Public } from '@/auth/decorators/public.decorator';
 export class GenresController {
   constructor(private readonly genresService: GenresService) {}
 
-  @Post()
+  @Post('admin/add')
   @Roles(Role.Admin)
   @ApiOperation({ summary: 'This action adds a new genre' })
+  @ApiBearerAuth()
   create(@Body() createGenreDto: CreateGenreDto) {
     return this.genresService.create(createGenreDto);
   }
@@ -33,15 +34,16 @@ export class GenresController {
     return this.genresService.findAll();
   }
 
-  @Patch(':slug')
+  @Patch('admin/:slug')
   @Roles(Role.Admin)
   @ApiOperation({ summary: 'This action updates a genre by slug' })
   @ApiParam({ name: 'slug' })
+  @ApiBearerAuth()
   update(@Param('slug') slug: string, @Body() updateGenreDto: UpdateGenreDto) {
     return this.genresService.update(slug, updateGenreDto);
   }
 
-  @Delete(':slug')
+  @Delete('admin/:slug')
   @Roles(Role.Admin)
   @ApiOperation({ summary: 'This action removes a genre by slug' })
   @ApiParam({ name: 'slug' })

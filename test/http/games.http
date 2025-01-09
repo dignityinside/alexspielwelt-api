@@ -49,3 +49,7 @@ Authorization: Bearer {{ TOKEN }}
 # @name Get all games for admin page
 GET {{URL}}/games/admin
 Authorization: Bearer {{ TOKEN }}
+
+###
+# @name Get stats
+GET {{URL}}/stats

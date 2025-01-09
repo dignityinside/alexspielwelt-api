@@ -173,6 +173,13 @@ export class GamesService {
   }
 
   /**
+   * Returns amount of all games
+   */
+  async countGames(): Promise<number> {
+    return await this.gameRepository.count();
+  }
+
+  /**
    * Generate slug
    * @param inputSlug
    * @param title

@@ -12,6 +12,7 @@ import { Game } from '@/games/entities/game.entity';
 import { GamesModule } from '@/games/games.module';
 import { Genre } from '@/genres/entities/genre.entity';
 import { GenresModule } from '@/genres/genres.module';
+import { StatsModule } from '@/stats/stats.module';
 
 @Module({
   imports: [
@@ -32,7 +33,8 @@ import { GenresModule } from '@/genres/genres.module';
     }),
     AuthModule,
     GamesModule,
-    GenresModule
+    GenresModule,
+    StatsModule,
   ],
   controllers: [AppController],
   providers: [AppService, AppConfigService],

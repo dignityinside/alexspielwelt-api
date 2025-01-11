@@ -43,6 +43,7 @@ export class Game {
   img: string;
 
   @Column({ length: 255, nullable: true })
+  @Expose()
   link: string;
 
   @Column({ length: 255, nullable: true })
